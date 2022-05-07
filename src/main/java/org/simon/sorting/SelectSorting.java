@@ -12,12 +12,15 @@ public class SelectSorting extends AbstractSorting {
         if (origin.length <= 1) {
             return;
         }
-        for (int i = 0; i < origin.length; i++) {
+        for (int i = 0; i < origin.length - 1; i++) {
+            int minVal = origin[i], minIndex = i;
             for (int j = i + 1; j < origin.length; j++) {
-                if (origin[i] > origin[j]) {
-                    exchange(origin, i, j);
+                if (origin[j] < minVal) {
+                    minIndex = j;
+                    minVal = origin[j];
                 }
             }
+            exchange(origin, i, minIndex);
         }
     }
 }
