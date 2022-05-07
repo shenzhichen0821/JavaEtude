@@ -3,7 +3,7 @@ package org.simon.leetcode;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestFindMiddle {
+public class TestFindMiddle4 {
 
     @Test
     public void test000() {

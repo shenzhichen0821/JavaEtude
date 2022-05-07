@@ -19,6 +19,8 @@ public class FindMiddle4 {
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode.cn/problems/median-of-two-sorted-arrays
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * 思路：使用归并排序的思路，左右两个指针分别选小的入新array，时间复杂度为O(logN)，需要额外空间
      */
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int pointerL = 0;

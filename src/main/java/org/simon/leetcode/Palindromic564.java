@@ -1,6 +1,5 @@
 package org.simon.leetcode;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Palindromic564 {
@@ -23,20 +22,66 @@ public class Palindromic564 {
      */
     public String nearestPalindromic(String n) {
         int[] peer = str2IntArray(n);
-        int[] result = new int[n.length()];
 
         if (peer.length == 1) {
-
-        } else if (peer.length == 2) {
-
+            peer[0]--;
+        } else if (peer.length < 3) {
+            int temp = Integer.parseInt(n);
+            int offset = 1;
+            while (true) {
+                if (isPalindromicIn999(temp - offset)) {
+                    return String.valueOf(temp - offset);
+                } else if (isPalindromicIn999(temp + offset)) {
+                    return String.valueOf(temp + offset);
+                }
+                offset++;
+            }
         } else {
-
+            long originPrefix = Long.parseLong(n.substring(0, n.length() / 2 + n.length() % 2));
+            int suffixLen = peer.length / 2;
+            return chooseBest(n,
+                    getPalindromicStrEven(originPrefix, suffixLen),
+                    getPalindromicStrEven(originPrefix - 1, suffixLen),
+                    getPalindromicStrEven(originPrefix + 1, suffixLen)
+                    );
         }
-
-        return intArray2Str(result);
+        return intArray2Str(peer);
     }
 
-    private static int[] str2IntArray(String in) {
+    public String getPalindromicStrEven(long prefix, int suffixLen) {
+        String prefixStr = String.valueOf(prefix);
+        char[] array = new char[suffixLen];
+        for (int i = 0; i < suffixLen; i++) {
+            array[suffixLen - i - 1] = i > prefixStr.length() - 1 ? '9' : prefixStr.charAt(i);
+        }
+        return prefixStr + new String(array);
+    }
+
+    public String chooseBest(String origin, String... candidates) {
+        assert candidates.length >= 1;
+        long originNum = Long.parseLong(origin);
+        long bestNum = -1;
+        long minOffset = -1;
+
+        for (String candidate : candidates) {
+            if (origin.equals(candidate)) {
+                continue;
+            }
+            long canNum = Long.parseLong(candidate);
+            long curOffset = Math.abs(canNum - originNum);
+            if (minOffset == -1 || curOffset < minOffset) {
+                bestNum = canNum;
+                minOffset = curOffset;
+            } else if (curOffset == minOffset) {
+                if (canNum < bestNum) {
+                    bestNum = canNum;
+                }
+            }
+        }
+        return String.valueOf(bestNum);
+    }
+
+    public int[] str2IntArray(String in) {
         if (in.isEmpty()) {
             throw new AssertionError("String is empty.");
         }
@@ -52,14 +97,32 @@ public class Palindromic564 {
         return result;
     }
 
-    private static String intArray2Str(int[] in) {
+    private String intArray2Str(int[] in) {
         StringBuilder builder = new StringBuilder();
         Arrays.stream(in).forEach(builder::append);
         return builder.toString();
     }
 
-    public static void main(String[] args) {
-//        BigInteger peer = new BigInteger("135723486");
-        System.out.println(intArray2Str(str2IntArray("135723486")));
+    public boolean isPalindromic(int[] origin) {
+        if (origin.length == 1) {
+            return true;
+        }
+        int index = 0;
+        while(index < origin.length / 2 + 1) {
+            if (origin[index] != origin[origin.length - 1 - index]) {
+                return false;
+            }
+            index++;
+        }
+        return true;
+    }
+    public boolean isPalindromicIn999(int in) {
+        if (in >= 100) {
+            return in % 10 == in / 100;
+        } else if (in < 10) {
+            return true;
+        } else {
+            return in % 10 == in / 10;
+        }
     }
 }
