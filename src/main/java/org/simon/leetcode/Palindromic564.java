@@ -19,6 +19,15 @@ public class Palindromic564 {
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode.cn/problems/find-the-closest-palindrome
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+     *
+     * 思路：
+     * 字符串分为两部分，prefix和suffix
+     * 1. abcxxx分为abc和xxx
+     * 2. abcdxxx分为abcd和xxx
+     * {prefix+1}{prefix+1逆序}, {prefix}{prefix逆序}, {prefix-1}{prefix-1逆序}, 三者比距离。
+     *
+     * abcxxx == abccba时作废
+     * 假如prefix遇到999+1要进位、1000-1要退位，不影响suffix。suffix位数在一开始就固定
      */
     public String nearestPalindromic(String n) {
         int[] peer = str2IntArray(n);
