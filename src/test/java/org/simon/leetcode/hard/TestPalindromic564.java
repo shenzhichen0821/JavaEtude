@@ -1,10 +1,8 @@
-package org.simon.leetcode;
+package org.simon.leetcode.hard;
 
+import org.simon.leetcode.hard.Palindromic564;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class TestPalindromic564 {
 

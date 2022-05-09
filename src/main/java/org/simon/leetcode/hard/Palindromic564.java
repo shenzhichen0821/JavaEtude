@@ -1,4 +1,4 @@
-package org.simon.leetcode;
+package org.simon.leetcode.hard;
 
 import java.util.Arrays;
 

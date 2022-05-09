@@ -1,5 +1,6 @@
-package org.simon.leetcode;
+package org.simon.leetcode.hard;
 
+import org.simon.leetcode.hard.FindMiddle4;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
