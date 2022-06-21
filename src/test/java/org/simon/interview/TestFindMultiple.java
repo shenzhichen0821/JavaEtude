@@ -1,4 +1,4 @@
-package org.simon.leetcode.interview;
+package org.simon.interview;
 
 import org.simon.interview.FindMultiple;
 import org.testng.annotations.Test;

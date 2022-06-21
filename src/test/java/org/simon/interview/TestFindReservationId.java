@@ -1,6 +1,5 @@
-package org.simon.leetcode.interview;
+package org.simon.interview;
 
-import org.simon.interview.FindReservationId;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
